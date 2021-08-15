@@ -1,0 +1,11 @@
+{% if menuExclude %}
+  <meta name="menu:exclude" content="true" />
+{% endif %}
+
+{% if menuOrder %}
+  <meta name="menu:order" content="{{ menuOrder }}" />
+{% endif %}
+
+{% if menuLinkText %}
+  <meta name="menu:link.text" content="{{ menuLinkText }}" />
+{% endif %}
