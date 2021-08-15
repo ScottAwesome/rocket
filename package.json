@@ -29,6 +29,7 @@
     "postinstall": "npm run setup",
     "release": "changeset publish && yarn format",
     "rocket:build": "node packages/cli/src/cli.js build",
+    "rocket:upgrade": "node packages/cli/src/cli.js upgrade",
     "search": "node packages/cli/src/cli.js search",
     "setup": "npm run setup:ts-configs && npm run build:packages",
     "setup:patches": "npx patch-package",
