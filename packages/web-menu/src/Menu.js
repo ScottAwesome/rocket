@@ -3,8 +3,8 @@
 export class Menu {
   static type = 'menu';
 
-  /** @type {NodeOfPage | null} */
-  currentNode = null;
+  /** @type {NodeOfPage | undefined} */
+  currentNode = undefined;
 
   options = {
     listTag: 'ul',

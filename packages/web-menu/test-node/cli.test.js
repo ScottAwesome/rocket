@@ -1,15 +1,10 @@
 import chai from 'chai';
-import { options } from 'colorette';
+import { green } from 'colorette';
 import { executeCli } from './test-helpers.js';
 
 const { expect } = chai;
 
 describe('cli', () => {
-  before(() => {
-    // ignore colors in tests as most CIs won't support it
-    options.enabled = false;
-  });
-
   it('works for two pages', async () => {
     const { readOutput, log } = await executeCli(
       {
@@ -18,8 +13,8 @@ describe('cli', () => {
       { captureLog: true },
     );
     expect(log[0]).to.match(/^👀 Analyzing file tree at/);
-    expect(log[1]).to.equal('📖 Found 2 pages');
-    expect(log[2]).to.equal('📝 Inserted 2 menus!');
+    expect(log[1]).to.equal(`📖 Found ${green(2)} pages`);
+    expect(log[2]).to.equal(`📝 Inserted ${green(2)} menus!`);
     expect(log[3]).to.match(/^✍️ {2}Writing files to/);
     expect(log[4]).to.match(/^✅ Menus inserted and written to filesystem. \(executed in/);
 
@@ -57,8 +52,8 @@ describe('cli', () => {
       },
       { captureLog: true },
     );
-    expect(log[1]).to.equal('📖 Found 6 pages');
-    expect(log[2]).to.equal('📝 Inserted 6 menus!');
+    expect(log[1]).to.equal(`📖 Found ${green(6)} pages`);
+    expect(log[2]).to.equal(`📝 Inserted ${green(6)} menus!`);
 
     const index = await readOutput('index.html');
     expect(index).to.equal(

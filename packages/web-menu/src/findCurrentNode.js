@@ -2,7 +2,7 @@
 
 /**
  * @param {NodeOfPage} node
- * @returns {NodeOfPage| undefined}
+ * @returns {NodeOfPage|undefined}
  */
 export function findCurrentNode(node) {
   return node.first(entry => entry.model.current === true);

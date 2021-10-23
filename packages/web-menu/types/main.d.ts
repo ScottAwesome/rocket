@@ -12,6 +12,7 @@ class Page {
   url: string;
   children: Node<Page>;
   order?: number;
+  active?: boolean;
   // tableOfContentsNode
 }
 
@@ -66,10 +67,10 @@ export type MetaPluginMenu = MetaPlugin<Menu>;
 export interface ConfigOptions {
   docsDir: string;
   outputDir?: string;
-  plugins: Menu[];
+  plugins?: Menu[];
   setupPlugins: Array<(menus: MetaPluginMenu[]) => MetaPluginMenu[]>;
 }
 
 export interface WebMenuCliOptions extends ConfigOptions {
-  configFile: string;
+  configFile?: string;
 }

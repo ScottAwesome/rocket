@@ -12,6 +12,7 @@ const tree = new TreeModel({});
 const twoLevels = tree.parse({
   name: 'Root',
   level: 0,
+  url: '#',
   children: [
     { name: 'Home', url: '#', level: 1 },
     { name: 'About', url: '#', level: 1, children: [{ name: 'Career', url: '#', level: 2 }] },
@@ -62,6 +63,7 @@ describe('renderMenu', () => {
     const components = tree.parse({
       name: 'Root',
       level: 0,
+      url: '#',
       children: [
         { name: 'Home', url: '#', level: 1 },
         {

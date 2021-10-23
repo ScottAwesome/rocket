@@ -37,6 +37,9 @@ function removeCurrent(tree) {
 export async function insertMenus(tree, options = {}) {
   let counter = 0;
   const { plugins } = options;
+  if (!plugins) {
+    return { counter: 0, tree };
+  }
 
   for (const node of tree.all()) {
     if (node.model.menus && node.model.menus.length > 0) {

@@ -1,15 +1,9 @@
 import chai from 'chai';
-import { options } from 'colorette';
 import { executeCli } from './test-helpers.js';
 
 const { expect } = chai;
 
 describe('presets', () => {
-  before(() => {
-    // ignore colors in tests as most CIs won't support it
-    options.enabled = false;
-  });
-
   it('breadcrumb', async () => {
     const { readOutput } = await executeCli(
       { docsDir: 'fixtures/preset-breadcrumb' },

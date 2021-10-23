@@ -38,7 +38,6 @@ export class WebMenuCli {
   /** @type {WebMenuCliOptions} */
   options = {
     docsDir: process.cwd(),
-    plugins: [],
     setupPlugins: [],
   };
 
