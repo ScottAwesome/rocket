@@ -5,7 +5,7 @@ import { Menu } from '../Menu.js';
 export class TableOfContents extends Menu {
   static type = 'table-of-contents';
 
-  constructor(options) {
+  constructor(options = {}) {
     super();
     this.options = {
       navLabel: 'Table of Contents',

@@ -3,6 +3,7 @@
 export class Menu {
   static type = 'menu';
 
+  /** @type {NodeOfPage | null} */
   currentNode = null;
 
   options = {

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-/** @typedef {import('../types/main').ConfigOptions} ConfigOptions */
+/** @typedef {import('../types/main').WebMenuCliOptions} WebMenuCliOptions */
+/** @typedef {import('../types/main').MetaPluginMenu} MetaPluginMenu */
 
 import path from 'path';
 import { cyan, green, red } from 'colorette';
@@ -20,22 +21,24 @@ import { ArticleOverview } from './menus/ArticleOverview.js';
 import { Main } from './menus/Main.js';
 import { TableOfContents } from './menus/TableOfContents.js';
 
+/** @type {MetaPluginMenu[]} */
 const defaultPlugins = [
-  { plugin: Header },
-  { plugin: Breadcrumb },
-  { plugin: Next },
-  { plugin: Main },
-  { plugin: Previous },
-  { plugin: ArticleOverview },
-  { plugin: TableOfContents },
+  { plugin: Header, options: {} },
+  { plugin: Breadcrumb, options: {}  },
+  { plugin: Next, options: {}  },
+  { plugin: Main, options: {}  },
+  { plugin: Previous, options: {}  },
+  { plugin: ArticleOverview, options: {}  },
+  { plugin: TableOfContents, options: {}  },
 ];
 
 const program = new Command();
 
 export class WebMenuCli {
-  /** @type {ConfigOptions} */
+  /** @type {WebMenuCliOptions} */
   options = {
-    plugins: undefined,
+    docsDir: process.cwd(),
+    plugins: [],
     setupPlugins: [],
   };
 
@@ -49,7 +52,7 @@ export class WebMenuCli {
   }
 
   /**
-   * @param {Partial<ConfigOptions>} newOptions
+   * @param {Partial<WebMenuCliOptions>} newOptions
    */
   setOptions(newOptions) {
     const setupPlugins = newOptions.setupPlugins
@@ -80,7 +83,7 @@ export class WebMenuCli {
     this.options = applyPlugins(this.options, defaultPlugins);
 
     const { docsDir: userDocsDir, outputDir: userOutputDir } = this.options;
-    this.docsDir = userDocsDir ? path.resolve(userDocsDir) : process.cwd();
+    this.docsDir = userDocsDir ? path.resolve(userDocsDir) : this.docsDir;
     this.outputDir = userOutputDir
       ? path.resolve(userOutputDir)
       : path.join(this.docsDir, '..', '_site');

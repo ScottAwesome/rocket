@@ -20,7 +20,6 @@ export class ArticleOverview extends Menu {
   }
 
   /**
-   * @param {NodeOfPage} node
    * @returns {Promise<string>}
    */
   async render() {

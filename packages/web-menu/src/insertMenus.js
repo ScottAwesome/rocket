@@ -1,7 +1,6 @@
 import { replaceBetween } from './sax-helpers.js';
 
-/** @typedef {import('../types/main').Page} Page */
-/** @typedef {import('tree-model/types').Node<Page>} NodeOfPage */
+/** @typedef {import('../types/main').NodeOfPage} NodeOfPage */
 /** @typedef {import('../types/main').WebMenuCliOptions} WebMenuCliOptions */
 
 /**
