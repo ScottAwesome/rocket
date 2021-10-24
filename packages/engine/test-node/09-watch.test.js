@@ -10,13 +10,15 @@ describe('Engine watch', () => {
     );
 
     await writeSource('index.rocket.js', "export default 'index';");
+    await writeSource('about.rocket.js', "export default 'about';");
     await execute();
-    expect(readOutput('index.html')).to.equal('index');
+    expect(readOutput('index.html')).to.equal('<my-layout>index</my-layout>');
+    expect(readOutput('about/index.html')).to.equal('<my-layout>about</my-layout>');
 
     watch();
     await writeSource('index.rocket.js', "export default 'updated index';");
-    await new Promise(resolve => setTimeout(resolve, 500)); // TODO: add an await afterNextRender() test helper
-    expect(readOutput('index.html')).to.equal('updated index');
+    await new Promise(resolve => setTimeout(resolve, 1000)); // TODO: add an await afterNextRender() test helper
+    expect(readOutput('index.html')).to.equal('<my-layout>updated index</my-layout>');
 
     await cleanup();
   });

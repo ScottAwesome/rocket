@@ -68,26 +68,37 @@ export class Engine {
     }
   }
 
+  async start() {
+    await this.watch();
+  }
+
+  async watchForRocketHeaderUpdate() {
+    const files = await gatherFiles(this.docsDir);
+
+  }
+
   async watch() {
     // TODO: do not gather files two times
     const files = await gatherFiles(this.docsDir);
 
+    this._watchController = new AbortController();
+
     for (const filePath of files) {
-      // TODO: use abort signal
-      this.foo = fs.watch(
+      fs.watch(
         filePath,
+        { signal: this._watchController.signal },
         debounce(() => this.renderFile(filePath), 25, true),
       );
     }
   }
 
   async cleanup() {
-    this.foo?.close();
+    this._watchController?.abort();
     await cleanupWorker();
   }
 
   async renderFile(filePath) {
     await updateRocketHeader(filePath, this.docsDir);
-    await renderViaWorker({ filePath, docsDir: this.docsDir, outputDir: this.outputDir });
+    await renderViaWorker({ filePath, outputDir: this.outputDir });
   }
 }
