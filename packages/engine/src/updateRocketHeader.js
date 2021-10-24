@@ -104,5 +104,7 @@ export async function updateRocketHeader(filePath, docsDir) {
   const header = await generateRocketHeader(content, { filePath, docsDir });
   const updatedContent = setRocketHeader(content, header, filePath);
 
-  await writeFile(filePath, updatedContent);
+  if (content !== updatedContent) {
+    await writeFile(filePath, updatedContent);
+  }
 }

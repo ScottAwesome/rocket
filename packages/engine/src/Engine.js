@@ -68,6 +68,7 @@ export class Engine {
     const files = await gatherFiles(this.docsDir);
 
     for (const filePath of files) {
+      await updateRocketHeader(filePath, this.docsDir);
       await this.renderFile(filePath);
     }
   }
@@ -82,30 +83,22 @@ export class Engine {
     this.watcher = new Watcher();
     await this.watcher.addPages(files);
 
-    const debouncedUpdateEvent = debounce(() => {
-      this.events.emit('rocketHeaderUpdated');
-    }, 5, false);
+    const debouncedUpdateEvent = debounce(
+      () => {
+        this.events.emit('rocketUpdated');
+      },
+      5,
+      false,
+    );
 
     this.watcher.watchPages(async page => {
       await updateRocketHeader(page.filePath, this.docsDir);
+      // if (page.active) {  // TODO: add feature to only render pages currently open in the browser
+      await this.renderFile(page.filePath);
+      // }
       debouncedUpdateEvent();
     });
   }
-
-  // async watch() {
-  //   // TODO: do not gather files two times
-  //   const files = await gatherFiles(this.docsDir);
-
-  //   this._watchController = new AbortController();
-
-  //   for (const filePath of files) {
-  //     fs.watch(
-  //       filePath,
-  //       { signal: this._watchController.signal },
-  //       debounce(() => this.renderFile(filePath), 25, true),
-  //     );
-  //   }
-  // }
 
   async cleanup() {
     if (this.watcher) {
@@ -115,7 +108,6 @@ export class Engine {
   }
 
   async renderFile(filePath) {
-    await updateRocketHeader(filePath, this.docsDir);
     await renderViaWorker({ filePath, outputDir: this.outputDir });
   }
 }

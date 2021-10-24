@@ -15,7 +15,7 @@ describe('Engine start', () => {
 
     await engine.start();
     await writeSource('index.rocket.js', "export default 'updated index';");
-    await anEngineEvent('rocketHeaderUpdated');
+    await anEngineEvent('rocketUpdated');
 
     expect(readSource('index.rocket.js')).to.equal(
       [
@@ -67,7 +67,7 @@ describe('Engine start', () => {
       ["export const some = 'data';", "export const more = 'stuff';"].join('\n'),
     );
 
-    await anEngineEvent('rocketHeaderUpdated');
+    await anEngineEvent('rocketUpdated');
 
     expect(readSource('index.rocket.js')).to.equal(
       [
@@ -81,11 +81,23 @@ describe('Engine start', () => {
         'export default `index`;',
       ].join('\n'),
     );
+    expect(readSource('about.rocket.js')).to.equal(
+      [
+        '/* START - Rocket auto generated - do not touch */',
+        "export const relativeFilePath = 'about.rocket.js';",
+        "import { some } from './thisDir.rocketData.js';",
+        "import { more } from './thisDir.rocketData.js';",
+        'export { some, more };',
+        '/* END - Rocket auto generated - do not touch */',
+        '',
+        'export default `about`;',
+      ].join('\n'),
+    );
 
     await cleanup();
   });
 
-  it.skip('rerenders only a single file when changing a single file', async () => {
+  it('rerenders only a single file when changing a single file', async () => {
     const { execute, readOutput, writeSource, anEngineEvent, cleanup, engine } = setupTestEngine(
       'fixtures/09-watch/edit-single-page/docs',
     );
@@ -98,7 +110,7 @@ describe('Engine start', () => {
 
     await engine.start();
     await writeSource('index.rocket.js', "export default 'updated index';");
-    await anEngineEvent('rocketHeaderUpdated');
+    await anEngineEvent('rocketUpdated');
     expect(readOutput('index.html')).to.equal('<my-layout>updated index</my-layout>');
     expect(readOutput('about/index.html')).to.equal('<my-layout>about</my-layout>');
 
