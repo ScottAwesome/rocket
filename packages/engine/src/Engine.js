@@ -4,6 +4,7 @@
 import fs from 'fs';
 import { mkdir } from 'fs/promises';
 import path from 'path';
+import { EventEmitter } from 'events';
 
 import { applyPlugins } from 'plugins-manager';
 
@@ -11,6 +12,7 @@ import { gatherFiles } from './gatherFiles.js';
 import { cleanupWorker, renderViaWorker } from './renderViaWorker.js';
 import { debounce } from './helpers/debounce.js';
 import { updateRocketHeader } from './updateRocketHeader.js';
+import { Watcher } from './Watcher.js';
 
 export class Engine {
   /** @type {EngineOptions} */
@@ -19,6 +21,8 @@ export class Engine {
     defaultPlugins: [],
     setupPlugins: [],
   };
+
+  events = new EventEmitter();
 
   /**
    * @param {Partial<EngineOptions>} options
@@ -69,31 +73,44 @@ export class Engine {
   }
 
   async start() {
-    await this.watch();
+    await this.watchForRocketHeaderUpdate();
   }
 
   async watchForRocketHeaderUpdate() {
     const files = await gatherFiles(this.docsDir);
 
+    this.watcher = new Watcher();
+    await this.watcher.addPages(files);
+
+    const debouncedUpdateEvent = debounce(() => {
+      this.events.emit('rocketHeaderUpdated');
+    }, 5, false);
+
+    this.watcher.watchPages(async page => {
+      await updateRocketHeader(page.filePath, this.docsDir);
+      debouncedUpdateEvent();
+    });
   }
 
-  async watch() {
-    // TODO: do not gather files two times
-    const files = await gatherFiles(this.docsDir);
+  // async watch() {
+  //   // TODO: do not gather files two times
+  //   const files = await gatherFiles(this.docsDir);
 
-    this._watchController = new AbortController();
+  //   this._watchController = new AbortController();
 
-    for (const filePath of files) {
-      fs.watch(
-        filePath,
-        { signal: this._watchController.signal },
-        debounce(() => this.renderFile(filePath), 25, true),
-      );
-    }
-  }
+  //   for (const filePath of files) {
+  //     fs.watch(
+  //       filePath,
+  //       { signal: this._watchController.signal },
+  //       debounce(() => this.renderFile(filePath), 25, true),
+  //     );
+  //   }
+  // }
 
   async cleanup() {
-    this._watchController?.abort();
+    if (this.watcher) {
+      this.watcher.cleanup();
+    }
     await cleanupWorker();
   }
 

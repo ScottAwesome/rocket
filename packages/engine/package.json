@@ -34,11 +34,9 @@
     "src"
   ],
   "dependencies": {
-    "chalk": "^4.0.0",
-    "command-line-args": "^5.1.1",
-    "plugins-manager": "^0.3.0",
-    "sax-wasm": "^2.0.0",
-    "tree-model": "^1.0.7"
+    "@custom-elements-manifest/find-dependencies": "0.0.4",
+    "es-module-lexer": "^0.9.3",
+    "plugins-manager": "^0.3.0"
   },
   "types": "dist-types/index.d.ts"
 }

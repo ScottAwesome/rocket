@@ -82,5 +82,28 @@ export function setupTestEngine(docsDir) {
     engine.watch();
   }
 
-  return { readOutput, outputExists, readSource, execute, writeSource, watch, cleanup };
+  function start() {
+    engine.start();
+  }
+
+  function anEngineEvent(eventName) {
+    return new Promise((resolve, reject) => {
+      engine.events.on(eventName, () => {
+        resolve();
+      });
+    });
+  }
+
+  return {
+    readOutput,
+    outputExists,
+    readSource,
+    execute,
+    writeSource,
+    watch,
+    cleanup,
+    start,
+    engine,
+    anEngineEvent,
+  };
 }
