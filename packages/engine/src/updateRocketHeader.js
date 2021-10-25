@@ -87,11 +87,23 @@ async function generateRocketHeader(content, { filePath, docsDir }) {
       ? [`export { ${possibleImports.map(el => el.importName).join(', ')} };`]
       : [];
 
+  const usedImports = new Map();
+  for (const importObj of possibleImports) {
+    if (usedImports.has(importObj.importModuleName)) {
+      usedImports.get(importObj.importModuleName).push(importObj.importName);
+    } else {
+      usedImports.set(importObj.importModuleName, [importObj.importName]);
+    }
+  }
+
   const relFilePath = path.relative(docsDir, filePath);
   const header = [
     '/* START - Rocket auto generated - do not touch */',
     `export const relativeFilePath = '${relFilePath}';`,
-    ...possibleImports.map(el => `import { ${el.importName} } from '${el.importModuleName}';`),
+    ...[...usedImports.entries()].map(
+      ([importModuleName, imports]) =>
+        `import { ${imports.join(', ')} } from '${importModuleName}';`,
+    ),
     ...exportsString,
     '/* END - Rocket auto generated - do not touch */',
   ].join('\n');

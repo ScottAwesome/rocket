@@ -116,4 +116,24 @@ describe('Engine Data Cascade', () => {
       ].join('\n'),
     );
   });
+
+  it('injects multiple exports from `thisDir.rocketData.js`', async () => {
+    const { execute, readSource, writeSource } = setupTestEngine(
+      'fixtures/01-data-cascade/03-this-dir-multiple-exports/docs',
+    );
+    await writeSource('index.rocket.js', 'export default `index`;');
+    await execute();
+
+    expect(readSource('index.rocket.js')).to.equal(
+      [
+        `/* START - Rocket auto generated - do not touch */`,
+        "export const relativeFilePath = 'index.rocket.js';",
+        "import { foo, bar } from './thisDir.rocketData.js';",
+        'export { foo, bar };',
+        `/* END - Rocket auto generated - do not touch */`,
+        '',
+        'export default `index`;',
+      ].join('\n'),
+    );
+  });
 });
