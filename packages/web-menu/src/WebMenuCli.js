@@ -18,7 +18,7 @@ import { Breadcrumb } from './menus/Breadcrumb.js';
 import { Next } from './menus/Next.js';
 import { Previous } from './menus/Previous.js';
 import { ArticleOverview } from './menus/ArticleOverview.js';
-import { Main } from './menus/Main.js';
+import { Index } from './menus/Index.js';
 import { TableOfContents } from './menus/TableOfContents.js';
 
 /** @type {MetaPluginMenu[]} */
@@ -26,7 +26,7 @@ const defaultPlugins = [
   { plugin: Site, options: {} },
   { plugin: Breadcrumb, options: {}  },
   { plugin: Next, options: {}  },
-  { plugin: Main, options: {}  },
+  { plugin: Index, options: {}  },
   { plugin: Previous, options: {}  },
   { plugin: ArticleOverview, options: {}  },
   { plugin: TableOfContents, options: {}  },

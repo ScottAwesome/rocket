@@ -2,8 +2,8 @@ import { Menu } from '../Menu.js';
 
 /** @typedef {import('../../types/main').NodeOfPage} NodeOfPage */
 
-export class Main extends Menu {
-  static type = 'main';
+export class Index extends Menu {
+  static type = 'index';
 
   /**
    * @param {NodeOfPage} node
@@ -15,7 +15,7 @@ export class Main extends Menu {
     }
     const activeLevelTwo = this.currentNode.getPath()[1] || node;
     return `
-      <nav aria-label="main">
+      <nav aria-label="index">
         ${this.list(activeLevelTwo)}
       </nav>
     `;

@@ -307,9 +307,9 @@ describe('presets', () => {
     );
   });
 
-  it('nestedWithCategoryHeading', async () => {
+  it('index', async () => {
     const { readOutput } = await executeCli(
-      { docsDir: 'fixtures/preset-main' },
+      { docsDir: 'fixtures/preset-index' },
       { captureLog: true },
     );
 
@@ -320,8 +320,8 @@ describe('presets', () => {
         '    <title>Overview</title>',
         '  </head>',
         '  <body>',
-        '    <web-menu name="main">',
-        '      <nav aria-label="main">',
+        '    <web-menu name="index">',
+        '      <nav aria-label="index">',
         '        <ul class="lvl-2">',
         '          <li class="web-menu-active">',
         '            <span>Content</span>',
@@ -366,8 +366,8 @@ describe('presets', () => {
         '    <title>Textarea</title>',
         '  </head>',
         '  <body>',
-        '    <web-menu name="main">',
-        '      <nav aria-label="main">',
+        '    <web-menu name="index">',
+        '      <nav aria-label="index">',
         '        <ul class="lvl-2">',
         '          <li>',
         '            <span>Content</span>',
@@ -410,8 +410,8 @@ describe('presets', () => {
         '    <title>Install Cli</title>',
         '  </head>',
         '  <body>',
-        '    <web-menu name="main">',
-        '      <nav aria-label="main">',
+        '    <web-menu name="index">',
+        '      <nav aria-label="index">',
         '        <ul class="lvl-2">',
         '          <li class="web-menu-active">',
         '            <span>Setup</span>',

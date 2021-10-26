@@ -56,22 +56,19 @@ export default {
 ## Add your own menu type
 
 ```js
-import { Menu } from '@web/menu'
+import { Menu } from '@web/menu';
 
 class MyMenu extends Menu {
   static name = 'my-menu';
-  
+
   async render() {
     return '--- My Menu ---';
   }
 }
 
-
 export default {
   docsDir: 'my-menu/',
-  presets: [
-    addPlugin(MyMenu)
-  ],
+  presets: [addPlugin(MyMenu)],
   presets: {
     myMenu: {
       async render() {
@@ -84,7 +81,7 @@ export default {
 
 ## Menu types
 
-1. **header**
+1. **site**
 
    - starts at level 1
    - flat list of links
@@ -99,29 +96,7 @@ export default {
    </web-menu>
    ```
 
-2. **nested**
-
-   - starts at level 1
-   - nested ul/li list
-
-   ```html
-   <web-menu name="nested">
-     <nav aria-label="Main">
-       <ul>
-         <li><a href="/about/">About</a></li>
-         <li>
-           <a href="/components/">Components</a>
-           <ul class="lvl-2">
-             <li><a href="/about/accordion/">Accordion</a></li>
-             <li><a href="/about/tabs/">Tabs</a></li>
-           </ul>
-         </li>
-       </ul>
-     </nav>
-   </web-menu>
-   ```
-
-3. **main**
+2. **main**
 
    - starts at level 2
    - nested ul/li list
@@ -130,8 +105,8 @@ export default {
    - ideally used in combination with `header`
 
    ```html
-   <web-menu name="main">
-     <nav aria-label="main">
+   <web-menu name="index">
+     <nav aria-label="index">
        <ul class="lvl-2">
          <li class="web-menu-active">
            <span>Content</span>
@@ -163,7 +138,7 @@ export default {
    </web-menu>
    ```
 
-4. **breadcrumb**
+3. **breadcrumb**
 
    - starts at root and goes the tree up to the current page
    - flat ol/li list
@@ -182,7 +157,7 @@ export default {
    </web-menu>
    ```
 
-5. **articleOverview**
+4. **articleOverview**
 
    - shows a flat list of pages
    - includes multiple meta data like cover image, heading, subHeading, authors, ...
@@ -230,7 +205,7 @@ export default {
    </web-menu>
    ```
 
-6. **tableOfContents**
+5. **tableOfContents**
 
    - lists the headlines of the current page in a hierarchy
    - nested ol/li list
@@ -255,7 +230,7 @@ export default {
    </web-menu>
    ```
 
-7. **next**
+6. **next**
 
    - shows the next page in the tree
    - is either the first child or he next sibling
@@ -269,7 +244,7 @@ export default {
    </web-menu>
    ```
 
-8. **previous**
+7. **previous**
 
    - shows the previous page in the tree
    - is either the previous sibling or the parent

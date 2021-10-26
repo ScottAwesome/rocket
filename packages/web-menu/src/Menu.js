@@ -71,7 +71,7 @@ export class Menu {
    */
   async render(node) {
     return `
-      <nav aria-label="Main">
+      <nav aria-label="index">
         ${this.list(node)}
       </nav>
     `;
