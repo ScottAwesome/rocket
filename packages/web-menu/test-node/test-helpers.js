@@ -1,11 +1,11 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import prettier from 'prettier';
-import { readFile } from 'fs/promises';
 
 import { buildTree } from '@web/menu';
 import { parseHtmlFile } from '../src/parseHtmlFile.js';
 import { WebMenuCli } from '../src/WebMenuCli.js';
+import { readFileSync } from 'fs';
 export { modelComparatorFn } from '../src/buildTree.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -44,6 +44,15 @@ export async function executeParse(inPath, opts = {}) {
   return metaData;
 }
 
+/**
+ * 
+ * @param {object} [engineOptions]
+ * @param {string} [engineOptions.docsDir]
+ * @param {string} [engineOptions.configFile]
+ * @param {object} [executeOptions]
+ * @param {boolean} [executeOptions.captureLog]
+ * @returns 
+ */
 export async function executeCli({ docsDir, configFile } = {}, { captureLog = false } = {}) {
   const options = { docsDir, configFile };
   if (docsDir) {
@@ -53,6 +62,7 @@ export async function executeCli({ docsDir, configFile } = {}, { captureLog = fa
     options.configFile = path.join(__dirname, configFile.split('/').join(path.sep));
   }
 
+  /** @type {string[]} */
   let log = [];
   const origLog = console.log;
   if (captureLog) {
@@ -65,11 +75,14 @@ export async function executeCli({ docsDir, configFile } = {}, { captureLog = fa
   cli.setOptions(options);
   await cli.run();
 
-  async function readOutput(toInspect) {
+  /**
+   * @param {string} toInspect 
+   * @returns {string}
+   */
+  function readOutput(toInspect) {
     const filePath = path.join(cli.outputDir, toInspect);
-    let text = await readFile(filePath);
-    text = text.toString();
-    text = format(text);
+    let text = readFileSync(filePath).toString();
+    text = formatHtml(text);
     return text;
   }
 
@@ -79,6 +92,10 @@ export async function executeCli({ docsDir, configFile } = {}, { captureLog = fa
   return { log, readOutput };
 }
 
-export function format(str) {
+/**
+ * @param {string} str 
+ * @returns {string}
+ */
+export function formatHtml(str) {
   return prettier.format(str, { parser: 'html', printWidth: 100 });
 }

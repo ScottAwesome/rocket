@@ -2,7 +2,7 @@ import chai from 'chai';
 import TreeModel from 'tree-model';
 import { insertMenus } from '../src/insertMenus.js';
 import { Header } from '../src/menus/Header.js';
-import { format } from './test-helpers.js';
+import { formatHtml } from './test-helpers.js';
 
 const { expect } = chai;
 const treeModel = new TreeModel({});
@@ -39,7 +39,7 @@ describe('insertMenus', () => {
       plugins: [new Header()]
     });
 
-    expect(format(onePage.model.fileString)).to.equal(
+    expect(formatHtml(onePage.model.fileString)).to.equal(
       [
         '<html>',
         '  <head>',

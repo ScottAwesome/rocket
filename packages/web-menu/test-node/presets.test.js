@@ -10,8 +10,7 @@ describe('presets', () => {
       { captureLog: true },
     );
 
-    const buttonBlue = await readOutput('components/button-blue/index.html');
-    expect(buttonBlue).to.equal(
+    expect(readOutput('components/button-blue/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -35,8 +34,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const buttonRed = await readOutput('components/button-red/index.html');
-    expect(buttonRed).to.equal(
+    expect(readOutput('components/button-red/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -60,8 +58,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const components = await readOutput('components/index.html');
-    expect(components).to.equal(
+    expect(readOutput('components/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -84,8 +81,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const home = await readOutput('index.html');
-    expect(home).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -113,8 +109,7 @@ describe('presets', () => {
       { captureLog: true },
     );
 
-    const buttonRed = await readOutput('components/button-red/index.html');
-    expect(buttonRed).to.equal(
+    expect(readOutput('components/button-red/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -133,8 +128,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const components = await readOutput('components/index.html');
-    expect(components).to.equal(
+    expect(readOutput('components/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -160,8 +154,7 @@ describe('presets', () => {
       { captureLog: true },
     );
 
-    const index = await readOutput('index.html');
-    expect(index).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -181,8 +174,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const first = await readOutput('first.html');
-    expect(first).to.equal(
+    expect(readOutput('first.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -207,8 +199,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const second = await readOutput('second.html');
-    expect(second).to.equal(
+    expect(readOutput('second.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -233,8 +224,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const third = await readOutput('third.html');
-    expect(third).to.equal(
+    expect(readOutput('third.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -261,8 +251,7 @@ describe('presets', () => {
       { captureLog: true },
     );
 
-    const blog = await readOutput('blog/index.html');
-    expect(blog).to.equal(
+    expect(readOutput('blog/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -324,8 +313,7 @@ describe('presets', () => {
       { captureLog: true },
     );
 
-    const accordionOverview = await readOutput('components/content/accordion/overview/index.html');
-    expect(accordionOverview).to.equal(
+    expect(readOutput('components/content/accordion/overview/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -371,8 +359,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const textarea = await readOutput('components/inputs/textarea/index.html');
-    expect(textarea).to.equal(
+    expect(readOutput('components/inputs/textarea/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -416,8 +403,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const installCli = await readOutput('getting-started/setup/install-cli/index.html');
-    expect(installCli).to.equal(
+    expect(readOutput('getting-started/setup/install-cli/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -452,8 +438,7 @@ describe('presets', () => {
       { captureLog: true },
     );
 
-    const toc = await readOutput('index.html');
-    expect(toc).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -508,8 +493,7 @@ describe('presets', () => {
       ].join('\n'),
     );
 
-    const empty = await readOutput('empty/index.html');
-    expect(empty).to.equal(
+    expect(readOutput('empty/index.html')).to.equal(
       [
         '<html>',
         '  <head>',

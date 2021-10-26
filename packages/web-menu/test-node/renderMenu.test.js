@@ -3,7 +3,7 @@ import { findCurrentNode, Menu } from '../index.js';
 
 import TreeModel from 'tree-model';
 
-import { format } from './test-helpers.js';
+import { formatHtml } from './test-helpers.js';
 
 const { expect } = chai;
 
@@ -29,7 +29,7 @@ describe('renderMenu', () => {
     const myMenu = new FirstLevelMenu();
 
     const htmlNavigation = await myMenu.render(twoLevels);
-    expect(format(htmlNavigation)).to.equal(
+    expect(formatHtml(htmlNavigation)).to.equal(
       [
         '<nav aria-label="Main">',
         '  <ul class="lvl-1">',
@@ -78,7 +78,7 @@ describe('renderMenu', () => {
       ],
     });
     const htmlNavigation = await defaultMenu.render(components);
-    expect(format(htmlNavigation)).to.equal(
+    expect(formatHtml(htmlNavigation)).to.equal(
       [
         '<nav aria-label="Main">',
         '  <ul class="lvl-1">',
@@ -117,7 +117,7 @@ describe('renderMenu', () => {
     });
     defaultMenu.currentNode = findCurrentNode(componentsActive);
     const htmlNavigation = await defaultMenu.render(componentsActive);
-    expect(format(htmlNavigation)).to.equal(
+    expect(formatHtml(htmlNavigation)).to.equal(
       [
         '<nav aria-label="Main">',
         '  <ul class="lvl-1">',

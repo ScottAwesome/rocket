@@ -18,8 +18,7 @@ describe('cli', () => {
     expect(log[3]).to.match(/^✍️ {2}Writing files to/);
     expect(log[4]).to.match(/^✅ Menus inserted and written to filesystem. \(executed in/);
 
-    const index = await readOutput('index.html');
-    expect(index).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -55,8 +54,7 @@ describe('cli', () => {
     expect(log[1]).to.equal(`📖 Found ${green(6)} pages`);
     expect(log[2]).to.equal(`📝 Inserted ${green(6)} menus!`);
 
-    const index = await readOutput('index.html');
-    expect(index).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -82,8 +80,7 @@ describe('cli', () => {
       ].join('\n'),
     );
 
-    const career = await readOutput('about/career/index.html');
-    expect(career).to.equal(
+    expect(readOutput('about/career/index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -113,8 +110,7 @@ describe('cli', () => {
       },
       { captureLog: true },
     );
-    const index = await readOutput('index.html');
-    expect(index).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -146,8 +142,7 @@ describe('cli', () => {
       { captureLog: true },
     );
 
-    const index = await readOutput('index.html');
-    expect(index).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
@@ -177,8 +172,7 @@ describe('cli', () => {
       { captureLog: true },
     );
 
-    const index = await readOutput('index.html');
-    expect(index).to.equal(
+    expect(readOutput('index.html')).to.equal(
       [
         '<html>',
         '  <head>',
