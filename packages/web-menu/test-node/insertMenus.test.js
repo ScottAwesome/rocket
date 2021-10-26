@@ -1,7 +1,7 @@
 import chai from 'chai';
 import TreeModel from 'tree-model';
 import { insertMenus } from '../src/insertMenus.js';
-import { Header } from '../src/menus/Header.js';
+import { Site } from '../src/menus/Site.js';
 import { formatHtml } from './test-helpers.js';
 
 const { expect } = chai;
@@ -11,16 +11,16 @@ describe('insertMenus', () => {
   it('will adjust the fileString of the tree', async () => {
     const onePage = treeModel.parse({
       fileString:
-        '<html>\n  <head>\n    <title>Single Menu Header</title>\n  </head>\n  <body>\n    <header>\n      <web-menu name="header"></web-menu>\n    </header>\n  </body>\n</html>\n',
+        '<html>\n  <head>\n    <title>Single Menu Header</title>\n  </head>\n  <body>\n    <header>\n      <web-menu name="site"></web-menu>\n    </header>\n  </body>\n</html>\n',
       menus: [
         {
           end: {
-            character: 30,
+            character: 28,
             line: 6,
           },
-          name: 'header',
+          name: 'site',
           start: {
-            character: 30,
+            character: 28,
             line: 6,
           },
         },
@@ -36,7 +36,7 @@ describe('insertMenus', () => {
     });
 
     await insertMenus(onePage, {
-      plugins: [new Header()]
+      plugins: [new Site()]
     });
 
     expect(formatHtml(onePage.model.fileString)).to.equal(
@@ -47,8 +47,8 @@ describe('insertMenus', () => {
         '  </head>',
         '  <body>',
         '    <header>',
-        '      <web-menu name="header">',
-        '        <nav aria-label="Header">',
+        '      <web-menu name="site">',
+        '        <nav aria-label="site">',
         '          <a href="#">Getting Started</a>',
         '          <a href="#">Components</a>',
         '          <a href="#">Blog</a>',

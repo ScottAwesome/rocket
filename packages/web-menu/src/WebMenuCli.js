@@ -13,7 +13,7 @@ import { buildTree } from './buildTree.js';
 import { insertMenus } from './insertMenus.js';
 import { writeTreeToFileSystem } from './writeTreeToFileSystem.js';
 
-import { Header } from './menus/Header.js';
+import { Site } from './menus/Site.js';
 import { Breadcrumb } from './menus/Breadcrumb.js';
 import { Next } from './menus/Next.js';
 import { Previous } from './menus/Previous.js';
@@ -23,7 +23,7 @@ import { TableOfContents } from './menus/TableOfContents.js';
 
 /** @type {MetaPluginMenu[]} */
 const defaultPlugins = [
-  { plugin: Header, options: {} },
+  { plugin: Site, options: {} },
   { plugin: Breadcrumb, options: {}  },
   { plugin: Next, options: {}  },
   { plugin: Main, options: {}  },

@@ -27,7 +27,7 @@ npx web-menu
 ## Usage as a html user
 
 Write your html as you normally would but don't include any menus.
-Where you want to place a menu put `<web-menu type="header"></web-menu>`.
+Where you want to place a menu put `<web-menu type="site"></web-menu>`.
 When you run `npx web-menu` it will insert the menu into this tag.
 
 ## Configuration file
@@ -91,8 +91,8 @@ export default {
    - commonly used as a top bar navigation of "sections"
 
    ```html
-   <web-menu name="header">
-     <nav aria-label="Header">
+   <web-menu name="site">
+     <nav aria-label="site">
        <a href="/about/">About</a>
        <a href="/components/" aria-current="page">Components</a>
      </nav>

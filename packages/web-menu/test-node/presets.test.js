@@ -103,9 +103,9 @@ describe('presets', () => {
     );
   });
 
-  it('header', async () => {
+  it('site', async () => {
     const { readOutput } = await executeCli(
-      { docsDir: 'fixtures/preset-header' },
+      { docsDir: 'fixtures/preset-site' },
       { captureLog: true },
     );
 
@@ -116,8 +116,8 @@ describe('presets', () => {
         '    <title>Button Red</title>',
         '  </head>',
         '  <body>',
-        '    <web-menu name="header">',
-        '      <nav aria-label="Header">',
+        '    <web-menu name="site">',
+        '      <nav aria-label="site">',
         '        <a href="/about/">About</a>',
         '        <a href="/components/">Components</a>',
         '      </nav>',
@@ -135,8 +135,8 @@ describe('presets', () => {
         '    <title>Components</title>',
         '  </head>',
         '  <body>',
-        '    <web-menu name="header">',
-        '      <nav aria-label="Header">',
+        '    <web-menu name="site">',
+        '      <nav aria-label="site">',
         '        <a href="/about/">About</a>',
         '        <a href="/components/" aria-current="page">Components</a>',
         '      </nav>',
@@ -494,7 +494,7 @@ describe('presets', () => {
     );
 
     expect(readOutput('empty/index.html')).to.equal(
-      [
+      [ 
         '<html>',
         '  <head>',
         '    <title>Welcome to the toc preset | My Page</title>',

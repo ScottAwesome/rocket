@@ -2,8 +2,8 @@ import { Menu } from '../Menu.js';
 
 /** @typedef {import('../../types/main').NodeOfPage} NodeOfPage */
 
-export class Header extends Menu {
-  static type = 'header';
+export class Site extends Menu {
+  static type = 'site';
 
   /**
    * @param {NodeOfPage} node
@@ -14,7 +14,7 @@ export class Header extends Menu {
       return '';
     }
     return `
-      <nav aria-label="Header">
+      <nav aria-label="site">
         ${node.children.map(child => this.link(child)).join('\n')}
       </nav>
     `;
