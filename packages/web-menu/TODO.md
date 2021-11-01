@@ -1,7 +1,3 @@
-MUST HAVE:
-
-- proper naming for all the presets 😅
-
 NICE TO HAVE:
 
 - Contribute to tree-model and "modernize it" es6, esm, types https://github.com/joaonuno/tree-model-js/issues/84

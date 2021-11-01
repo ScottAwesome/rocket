@@ -2,8 +2,19 @@ import { Menu } from '../Menu.js';
 
 /** @typedef {import('../../types/main').NodeOfPage} NodeOfPage */
 
-export class Index extends Menu {
+export class IndexMenu extends Menu {
   static type = 'index';
+
+  options = {
+    ...this.options,
+    /** @param {string} nav */
+    navWrapper: nav => `<nav aria-label="index">${nav}</nav>`,
+  };
+
+  constructor(options = {}) {
+    super(options);
+    this.options = { ...this.options, ...options };
+  }
 
   /**
    * @param {NodeOfPage} node
@@ -14,11 +25,8 @@ export class Index extends Menu {
       return '';
     }
     const activeLevelTwo = this.currentNode.getPath()[1] || node;
-    return `
-      <nav aria-label="index">
-        ${this.list(activeLevelTwo)}
-      </nav>
-    `;
+    const { navWrapper } = this.options;
+    return navWrapper(this.list(activeLevelTwo));
   }
 
   /**

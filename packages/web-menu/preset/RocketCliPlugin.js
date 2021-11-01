@@ -19,6 +19,7 @@ export class RocketCliPlugin {
     this.webMenu.setOptions({
       docsDir: config.outputDevDir,
       outputDir: config.outputDevDir,
+      setupPlugins: config.setupMenus
     });
   }
 

@@ -53,6 +53,7 @@ export async function normalizeConfig(inConfig) {
     setupEleventyPlugins: [],
     setupEleventyComputedConfig: [],
     setupCliPlugins: [],
+    setupMenus: [],
     eleventy: () => {},
     command: 'help',
     watch: true,
@@ -171,6 +172,9 @@ export async function normalizeConfig(inConfig) {
     }
     if (preset.setupCliPlugins) {
       config.setupCliPlugins = [...config.setupCliPlugins, ...preset.setupCliPlugins];
+    }
+    if (preset.setupMenus) {
+      config.setupMenus = [...config.setupMenus, ...preset.setupMenus];
     }
 
     if (typeof preset.before11ty === 'function') {

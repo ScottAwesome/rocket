@@ -37,7 +37,7 @@
     "xprestart": "yarn analyze",
     "start": "node --trace-warnings packages/cli/src/cli.js start",
     "test": "yarn test:node && yarn test:web",
-    "test:node": "mocha \"packages/*/test-node/**/*.test.{ts,js,mjs,cjs}\" --timeout 5000 --reporter dot --exit",
+    "test:node": "mocha \"packages/*/test-node/**/*.test.{ts,js,mjs,cjs}\" -- --timeout 5000 --reporter dot --exit",
     "test:web": "web-test-runner",
     "types": "run-s types:clear types:copy types:build",
     "types:build": "tsc --build",

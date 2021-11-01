@@ -45,13 +45,13 @@ export async function executeParse(inPath, opts = {}) {
 }
 
 /**
- * 
+ *
  * @param {object} [engineOptions]
  * @param {string} [engineOptions.docsDir]
  * @param {string} [engineOptions.configFile]
  * @param {object} [executeOptions]
  * @param {boolean} [executeOptions.captureLog]
- * @returns 
+ * @returns
  */
 export async function executeCli({ docsDir, configFile } = {}, { captureLog = false } = {}) {
   const options = { docsDir, configFile };
@@ -76,7 +76,7 @@ export async function executeCli({ docsDir, configFile } = {}, { captureLog = fa
   await cli.run();
 
   /**
-   * @param {string} toInspect 
+   * @param {string} toInspect
    * @returns {string}
    */
   function readOutput(toInspect) {
@@ -93,9 +93,15 @@ export async function executeCli({ docsDir, configFile } = {}, { captureLog = fa
 }
 
 /**
- * @param {string} str 
+ * @param {string} str
  * @returns {string}
  */
 export function formatHtml(str) {
-  return prettier.format(str, { parser: 'html', printWidth: 100 });
+  return prettier.format(str, {
+    parser: 'html',
+    singleQuote: true,
+    arrowParens: 'avoid',
+    printWidth: 100,
+    trailingComma: 'all',
+  });
 }

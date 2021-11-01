@@ -1,11 +1,11 @@
 import chai from 'chai';
 import chalk from 'chalk';
-import { executeStart, readStartOutput, setFixtureDir } from '@rocket/cli/test-helpers';
+import { execute, setFixtureDir } from '@rocket/cli/test-helpers';
 
 const { expect } = chai;
 
 describe('RocketCli Menu', () => {
-  let cli;
+  let cleanupCli;
 
   before(() => {
     // ignore colors in tests as most CIs won't support it
@@ -14,14 +14,17 @@ describe('RocketCli Menu', () => {
   });
 
   afterEach(async () => {
-    if (cli?.cleanup) {
-      await cli.cleanup();
+    if (cleanupCli?.cleanup) {
+      await cleanupCli.cleanup();
     }
   });
 
   it('will render a menu', async () => {
-    cli = await executeStart('e2e-fixtures/menu/rocket.config.js');
-    const indexHtml = await readStartOutput(cli, 'index.html', {
+    const { cli, readOutput } = await execute('e2e-fixtures/menu/rocket.config.js', {
+      captureLog: true,
+    });
+    cleanupCli = cli;
+    const indexHtml = await readOutput('index.html', {
       formatHtml: true,
     });
     expect(indexHtml).to.equal(
@@ -29,12 +32,13 @@ describe('RocketCli Menu', () => {
         '<html>',
         '  <head> </head>',
         '  <body>',
-        '    <nav aria-label="Header">',
-        '      <a href="/components/">Components</a>',
-        '      <a href="/getting-started/">Getting Started</a>',
-        '      <a href="/blog/">Blog</a>',
-        '    </nav>',
-        '',
+        '    <web-menu name="site">',
+        '      <nav aria-label="site">',
+        '        <a href="/components/">Components</a>',
+        '        <a href="/getting-started/">Getting Started</a>',
+        '        <a href="/blog/">Blog</a>',
+        '      </nav>',
+        '    </web-menu>',
         '    <h1 id="menu-page">',
         '      <a aria-hidden="true" tabindex="-1" href="#menu-page"><span class="icon icon-link"></span></a',
         '      >Menu Page',
@@ -44,7 +48,7 @@ describe('RocketCli Menu', () => {
       ].join('\n'),
     );
 
-    const accordion = await readStartOutput(cli, 'components/content/accordion/index.html', {
+    const accordion = await readOutput('components/content/accordion/index.html', {
       formatHtml: true,
     });
     expect(accordion).to.equal(
@@ -54,12 +58,13 @@ describe('RocketCli Menu', () => {
         '    <meta name="menu:order" content="10" />',
         '  </head>',
         '  <body>',
-        '    <nav aria-label="Header">',
-        '      <a href="/components/">Components</a>',
-        '      <a href="/getting-started/">Getting Started</a>',
-        '      <a href="/blog/">Blog</a>',
-        '    </nav>',
-        '',
+        '    <web-menu name="site">',
+        '      <nav aria-label="site">',
+        '        <a href="/components/">Components</a>',
+        '        <a href="/getting-started/">Getting Started</a>',
+        '        <a href="/blog/">Blog</a>',
+        '      </nav>',
+        '    </web-menu>',
         '    <h1 id="accordion">',
         '      <a aria-hidden="true" tabindex="-1" href="#accordion"><span class="icon icon-link"></span></a',
         '      >Accordion',

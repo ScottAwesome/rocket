@@ -1,8 +1,37 @@
 const fs = require('fs');
 const path = require('path');
+const { processContentWithTitle } = require('@rocket/core/title');
 const { createSocialImage: defaultCreateSocialImage } = require('./createSocialImage.cjs');
 const { getComputedConfig } = require('./computedConfig.cjs');
 const { executeSetupFunctions } = require('plugins-manager');
+
+class TitleMetaPlugin {
+  static dataName = 'titleMeta';
+
+  async execute(data) {
+    if (data.titleMeta) {
+      return data.titleMeta;
+    }
+    let text = await fs.promises.readFile(data.page.inputPath);
+    text = text.toString();
+    const titleMetaFromContent = processContentWithTitle(text, 'md');
+    if (titleMetaFromContent) {
+      return titleMetaFromContent;
+    }
+    return {};
+  }
+}
+
+class TitlePlugin {
+  static dataName = 'title';
+
+  async execute(data) {
+    if (data.title) {
+      return data.title;
+    }
+    return data.titleMeta?.title;
+  }
+}
 
 class SectionPlugin {
   static dataName = 'section';
@@ -177,6 +206,8 @@ function generateEleventyComputed() {
   const rocketConfig = getComputedConfig();
 
   let metaPlugins = [
+    { plugin: TitleMetaPlugin, options: {} }, // TODO: remove after search & social media are standalone
+    { plugin: TitlePlugin, options: {} }, // TODO: remove after search & social media are standalone
     { plugin: SectionPlugin, options: {} }, // TODO: remove this
     { plugin: SocialMediaImagePlugin, options: { rocketConfig } }, // TODO: convert to standalone tool that can work with html
     { plugin: JoiningBlocksPlugin, options: rocketConfig },
